@@ -28,7 +28,7 @@ class RegionListItemButton extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 25.0),
-                child: Text('hande', style: TextStyle( color: isLight ? dark2Color: lightBlue)),
+                child: Text('America/Argentina/Salta', style: TextStyle( color: isLight ? dark2Color: lightBlue)),
               ),
             ),
           ),

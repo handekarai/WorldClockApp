@@ -5,9 +5,11 @@ import '../widget/time_container.dart';
 import '../widget/detail_text_widget.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key, required this.isLight}) : super(key: key);
+  const DetailScreen({Key? key, required this.isLight, this.selectedTimeZone}) : super(key: key);
 
   final bool isLight;
+  final selectedTimeZone;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +56,7 @@ class DetailScreen extends StatelessWidget {
         ),
         DetailTextWidget(isLight: isLight, text: 'Abidjan'),
         const SizedBox(height: 5.0),
-        DetailTextWidget(isLight: isLight, text: 'Africa'),
+        DetailTextWidget(isLight: isLight, text: selectedTimeZone.timezone),
         const SizedBox(height: 30.0),
         DetailTextWidget(isLight: isLight, text: 'Çarşamba, GMT + 01:00'),
         const SizedBox(height: 5.0),

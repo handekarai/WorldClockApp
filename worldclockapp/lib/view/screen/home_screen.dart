@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:worldclockapp/constant.dart';
 import 'package:worldclockapp/view/widget/welcome_widget.dart';
 import 'package:worldclockapp/view/widget/theme_button.dart';
+import 'package:worldclockapp/view/widget/region_list_item_button.dart';
+
+import 'detail_screen.dart';
 
 class HomeScreen extends StatelessWidget {
    HomeScreen({Key? key}) : super(key: key);
 
-  var isLight = true;
+  var isLight = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,6 +65,13 @@ class HomeScreen extends StatelessWidget {
                     )
                   ],
                 )),
+                const SizedBox(height: 10.0),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: RegionListItemButton(isLight: isLight,onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(isLight: isLight)));
+                  }),
+                )
         ],
       ),
     );

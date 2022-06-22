@@ -5,6 +5,7 @@ import 'package:worldclockapp/view/widget/theme_button.dart';
 import 'package:worldclockapp/view/widget/region_list_item_button.dart';
 import 'package:worldclockapp/view_model/home_view_model.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'detail_screen.dart';
 
@@ -17,7 +18,7 @@ class HomeScreen extends StatelessWidget {
     await _homeViewModel.getUserTimeZone();  
    // print(_homeViewModel.userTimeZone.datetime);
     await _homeViewModel.getRegionTimeZone();
-
+    FlutterNativeSplash.remove();
   }
 
   @override

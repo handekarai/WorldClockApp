@@ -12,7 +12,10 @@ abstract class HomeViewModelBase with Store{
   final _worldTimeApiService = WorldTimeApiService();
 
   @observable
-  var regions,selectedArea,selectedLocation,selectedTimeZone,userTimeZone;
+  var selectedArea,selectedLocation,selectedTimeZone,userTimeZone;
+
+  @observable 
+  var regions = ObservableList();
 
   @observable
   var isLight = true;
@@ -65,7 +68,7 @@ abstract class HomeViewModelBase with Store{
 
   @action
   getRegions() async {
-    regions = await _worldTimeApiService.fetchRegions() as List;
+    regions = ObservableList.of(await _worldTimeApiService.fetchRegions());
   }
 
   @action 
@@ -73,5 +76,10 @@ abstract class HomeViewModelBase with Store{
     int idx = regionName.indexOf("/");
     selectedArea = regionName.substring(0,idx).trim();
     selectedLocation = regionName.substring(idx+1).trim();
+  }
+
+  @action 
+  filterRegions(String keyword){
+     regions = ObservableList.of(regions.where((i) => (i.toLowerCase().contains(keyword.toLowerCase()))).toList());
   }
 }

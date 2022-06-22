@@ -65,6 +65,7 @@ class HomeScreen extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 30.0, right: 30.0),
                         child: TextField(
+                          onChanged: (value) => value.length > 2 ? _homeViewModel.filterRegions(value) : _homeViewModel.getRegions(),
                           decoration: InputDecoration(
                               contentPadding: const EdgeInsets.only(
                                   top: 10.0, bottom: 10.0),

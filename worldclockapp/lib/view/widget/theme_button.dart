@@ -17,19 +17,20 @@ class ThemeButton extends StatelessWidget {
         onTap: () => onTap(),
         child: Container(
           height: 40.0,
-          width: 40.0,
+          width: 41.0,
           decoration: BoxDecoration(
-            color: isLight ? dark2Color: lightBg,
-            borderRadius: BorderRadius.circular(50.0),
-            border: Border.fromBorderSide(BorderSide(color: isLight ? Colors.grey.shade400 : lightBlue ,width: 4.0)),
+              borderRadius: BorderRadius.circular(20.0),
+              border: Border.all(color: isLight ? darkColor.withOpacity(.2) : whiteColor.withOpacity(.2) ,width: 3.0),
+            ),
+          child: Container(
+            height: 34.0,
+            width: 35.0,
+            decoration: BoxDecoration(
+              color: isLight ? darkColor: whiteColor,
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: isLight ? Image.asset('assets/images/moon.png') : Image.asset('assets/images/sun.png')
           ),
-          child: Icon(
-                    isLight
-                        ? Icons.brightness_2
-                        : Icons.sunny,
-                    size: 20,
-                    color: isLight ? lightBg: dark2Color,
-                  ),
         ),
       );
   }

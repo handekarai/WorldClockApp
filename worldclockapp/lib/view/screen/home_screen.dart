@@ -29,12 +29,13 @@ class HomeScreen extends StatelessWidget {
         body: Column(
           children: [
             SizedBox(
-                height: 235.0,
+                height: 220.0,
                 width: MediaQuery.of(context).size.width,
                 child: Stack(
                   children: [
                     Container(
-                      height: 210.0,
+                      height: 199.0,
+                      width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         color: _homeViewModel.isLight ? lightBlue : dark2Color,
                         borderRadius: const BorderRadius.vertical(
@@ -47,8 +48,8 @@ class HomeScreen extends StatelessWidget {
                       child: WelcomeWidget(isLight: _homeViewModel.isLight),
                     ),
                     Positioned(
-                        top: MediaQuery.of(context).padding.top + 20.0,
-                        right: 20.0,
+                        bottom: 117.0,  //96+21(difference between sizedbox and container)
+                        right: 33.0,
                         child: ThemeButton(
                             isLight: _homeViewModel.isLight,
                             onTap: _homeViewModel.changeTheme)),
@@ -60,8 +61,7 @@ class HomeScreen extends StatelessWidget {
                           decoration: InputDecoration(
                               contentPadding:
                                   const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                              prefixIcon:
-                                  const Icon(Icons.search, color: darkColor),
+                              prefixIcon:Image.asset('assets/images/search.png'),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(color: strokeBlue),
                                 borderRadius: BorderRadius.circular(50.0),
@@ -72,14 +72,14 @@ class HomeScreen extends StatelessWidget {
                               ),
                               filled: true,
                               hintStyle: const TextStyle(color: darkColor),
-                              hintText: "Arama",
-                              fillColor: Colors.white),
+                              hintText: 'Arama',
+                              fillColor: whiteColor),
                         ),
                       ),
                     )
                   ],
                 )),
-            const SizedBox(height: 10.0),
+            const SizedBox(height: 16.0), // figma:42  42 = 5top padding + 21 upper sizedbox-container difference + 16 this sized box
             SizedBox(
               width: MediaQuery.of(context).size.width,
               child: RegionListItemButton(

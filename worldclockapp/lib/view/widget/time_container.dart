@@ -13,20 +13,21 @@ class TimeContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150.0,
-      width: 150.0,
+      height: 140.0,
+      width: 140.0,
       decoration: BoxDecoration(
-        color: isLight ? Colors.white : dark2Color,
-        borderRadius: BorderRadius.circular(10.0),
+        color: isLight ? whiteColor : dark2Color,
+        borderRadius: BorderRadius.circular(14.0),
         border: const Border.fromBorderSide(
             BorderSide(color: darkColor, width: 2.0)),
       ),
       child: Center(
         child: Text(timeText,
             style: TextStyle(
-                color: isLight ? darkColor : Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 90)),
+                color: isLight ? darkColor : whiteColor,
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.w600,
+                fontSize: 79)),
       ),
     );
   }

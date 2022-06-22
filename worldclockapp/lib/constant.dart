@@ -8,4 +8,4 @@ const lightBg = Color(0xFFFAFCFF);
 
 
 const lightBlue = Color(0xFFE3EEFF);
-const strokeBlue = Color(0xFF8FAFE0);
+const strokeBlue = Color(0xFF8FAFE0); 

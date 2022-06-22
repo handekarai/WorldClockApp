@@ -17,7 +17,6 @@ class HomeScreen extends StatelessWidget {
   setupData() async {
     await _homeViewModel.getRegions();
     await _homeViewModel.getUserTimeZone();
-    await _homeViewModel.getRegionTimeZone();
     FlutterNativeSplash.remove();
   }
 
@@ -49,9 +48,10 @@ class HomeScreen extends StatelessWidget {
                       child: WelcomeWidget(
                           isLight: _homeViewModel.isLight,
                           userTimeZone: _homeViewModel.userTimeZone,
-                          userMonthName: _homeViewModel.userMonthName(
+                          userMonthName: _homeViewModel.getMonthName(
                               _homeViewModel.userTimeZone.datetime.month),
-                          userDayName: _homeViewModel.userDayName( _homeViewModel.userTimeZone.datetime)),
+                          userDayName: _homeViewModel.getDayName(
+                              _homeViewModel.userTimeZone.datetime)),
                     ),
                     Positioned(
                         bottom:
@@ -90,20 +90,41 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(
                 height:
                     16.0), // figma:42  42 = 5top padding + 21 upper sizedbox-container difference + 16 this sized box
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: RegionListItemButton(
-                  isLight: _homeViewModel.isLight,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DetailScreen(
-                                isLight: _homeViewModel.isLight,
-                                selectedTimeZone:
-                                    _homeViewModel.selectedTimeZone)));
-                  }),
-            )
+            Flexible(
+              child: SingleChildScrollView(
+                child: ListView.builder(
+                  padding: EdgeInsets.zero, //issue: list view inside scaffold with no appbar puts auto padding , this is solution to remove
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: _homeViewModel.regions.length,
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: RegionListItemButton(
+                          name: _homeViewModel.regions[index],
+                          isLight: _homeViewModel.isLight,
+                          onPressed: () async {
+                            await _homeViewModel.getRegionTimeZone(_homeViewModel.regions[index]);
+                            _homeViewModel.splitRegionName(_homeViewModel.regions[index]);
+                            // ignore: use_build_context_synchronously
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailScreen(
+                                        isLight: _homeViewModel.isLight,
+                                        selectedTimeZone:
+                                            _homeViewModel.selectedTimeZone,
+                                            selectedArea: _homeViewModel.selectedArea,
+                                            selectedLocation: _homeViewModel.selectedLocation,
+                                            dayName: _homeViewModel.getDayName(_homeViewModel.selectedTimeZone.datetime),
+                                            monthName: _homeViewModel.getMonthName(_homeViewModel.selectedTimeZone.datetime.month),
+                                            )));
+                          }),
+                    );
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),

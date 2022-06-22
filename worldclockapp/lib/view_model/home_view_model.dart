@@ -12,19 +12,13 @@ abstract class HomeViewModelBase with Store{
   final _worldTimeApiService = WorldTimeApiService();
 
   @observable
-  var regions;
-
-  @observable
-  var selectedTimeZone;
-
-  @observable
-  var userTimeZone;
+  var regions,selectedArea,selectedLocation,selectedTimeZone,userTimeZone;
 
   @observable
   var isLight = true;
 
 
-  String userMonthName(int month){
+  String getMonthName(int month){
     switch (month){
       case 1: { return 'Ocak';} 
       case 2: { return 'Şubat';} 
@@ -42,7 +36,7 @@ abstract class HomeViewModelBase with Store{
     return 'null';
   }
 
-  String userDayName(date){
+  String getDayName(date){
     switch(DateFormat('EEEE').format(date)){
       case 'Monday' : { return '';}
       case 'Tuesday' : { return '';}
@@ -65,14 +59,19 @@ abstract class HomeViewModelBase with Store{
    // print(userTimeZone);
   }
   @action
-  getRegionTimeZone() async {
-    selectedTimeZone = RegionListItemModel.fromJson(await _worldTimeApiService.fetchRegionTimeZone());
+  getRegionTimeZone(String region) async {
+    selectedTimeZone = RegionListItemModel.fromJson(await _worldTimeApiService.fetchRegionTimeZone(region));
   }
 
   @action
   getRegions() async {
-    regions = await _worldTimeApiService.fetchRegions();
-    print(regions);
+    regions = await _worldTimeApiService.fetchRegions() as List;
   }
 
+  @action 
+  splitRegionName(String regionName){
+    int idx = regionName.indexOf("/");
+    selectedArea = regionName.substring(0,idx).trim();
+    selectedLocation = regionName.substring(idx+1).trim();
+  }
 }

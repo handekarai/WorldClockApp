@@ -12,7 +12,7 @@ class WorldTimeApiService{
     return await apiHelper.get('/Europe/Istanbul'); //.get('/ip');
   }
 
-  Future fetchRegionTimeZone() async {
-    return await apiHelper.get('/timezone/America/Argentina/Salta');
+  Future fetchRegionTimeZone(String region) async {
+    return await apiHelper.get('/timezone/$region');
   }
 }

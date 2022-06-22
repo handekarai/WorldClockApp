@@ -5,11 +5,12 @@ import 'package:worldclockapp/constant.dart';
 class RegionListItemButton extends StatelessWidget {
   const RegionListItemButton({
     Key? key,
-    required this.isLight, required this.onPressed,
+    required this.isLight, required this.onPressed, required this.name,
   }) : super(key: key);
 
   final bool isLight;
   final Function onPressed;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class RegionListItemButton extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20.0, 18.0, 10.0, 18.0),
-                child: Text('America/Argentina/Salta', style: TextStyle(fontFamily: 'MontSerrat', fontSize: 15, fontWeight: FontWeight.normal, color: isLight ? darkColor: whiteColor)),
+                child: Text(name, style: TextStyle(fontFamily: 'MontSerrat', fontSize: 15, fontWeight: FontWeight.normal, color: isLight ? darkColor: whiteColor)),
               ),
             ),
           ),

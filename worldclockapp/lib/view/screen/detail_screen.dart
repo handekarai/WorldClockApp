@@ -5,10 +5,10 @@ import '../widget/time_container.dart';
 import '../widget/detail_text_widget.dart';
 
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key, required this.isLight, this.selectedTimeZone}) : super(key: key);
+  const DetailScreen({Key? key, required this.isLight, this.selectedTimeZone, this.selectedArea, this.selectedLocation, this.dayName, this.monthName}) : super(key: key);
 
   final bool isLight;
-  final selectedTimeZone;
+  final selectedTimeZone,selectedArea,selectedLocation,dayName,monthName;
 
   @override
   Widget build(BuildContext context) {
@@ -43,21 +43,21 @@ class DetailScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              TimeContainer(isLight: isLight, timeText: '13'),
+              TimeContainer(isLight: isLight, timeText: '${selectedTimeZone.datetime.hour}'),
               Text(':',
                   style: TextStyle(
                       fontSize: 70, color: isLight ? darkColor : Colors.white)),
-              TimeContainer(isLight: isLight, timeText: '48')
+              TimeContainer(isLight: isLight, timeText: '${selectedTimeZone.datetime.minute}')
             ],
           ),
         ),
-        DetailTextWidget(isLight: isLight, text: 'Abidjan', fontSize: 24, fontWeight: FontWeight.w600),
+        DetailTextWidget(isLight: isLight, text: selectedArea, fontSize: 24, fontWeight: FontWeight.w600),
         const SizedBox(height: 5.0),
-        DetailTextWidget(isLight: isLight, text: selectedTimeZone.timezone, fontSize: 20),
+        DetailTextWidget(isLight: isLight, text: selectedLocation, fontSize: 20),
         const SizedBox(height: 25.0),
-        DetailTextWidget(isLight: isLight, text: 'Çarşamba, GMT + 01:00'),
+        DetailTextWidget(isLight: isLight, text: '$dayName, GMT ${selectedTimeZone.utcOffset}'),
         const SizedBox(height: 5.0),
-        DetailTextWidget(isLight: isLight, text: 'Haziran 8, 2022'),
+        DetailTextWidget(isLight: isLight, text: '$monthName ${selectedTimeZone.datetime.day}, ${selectedTimeZone.datetime.year}'),
       ]),
     );
   }

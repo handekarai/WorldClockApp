@@ -22,7 +22,7 @@ class TimeContainer extends StatelessWidget {
             BorderSide(color: darkColor, width: 2.0)),
       ),
       child: Center(
-        child: Text(timeText,
+        child: Text(timeText.length == 1 ? '0$timeText': timeText,
             style: TextStyle(
                 color: isLight ? darkColor : whiteColor,
                 fontFamily: 'Montserrat',

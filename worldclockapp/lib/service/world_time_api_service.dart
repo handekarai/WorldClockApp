@@ -4,11 +4,15 @@ class WorldTimeApiService{
 
   var apiHelper = ApiHelper();
 
-  Future fetchUserTimeZone()async{
-    return await apiHelper.get('/ip');
+  Future fetchRegions() async {
+    return await apiHelper.get('/timezone');
   }
 
-  Future fetchRegionTimeZone()async{
+  Future fetchUserTimeZone() async {
+    return await apiHelper.get('/Europe/Istanbul'); //.get('/ip');
+  }
+
+  Future fetchRegionTimeZone() async {
     return await apiHelper.get('/timezone/America/Argentina/Salta');
   }
 }

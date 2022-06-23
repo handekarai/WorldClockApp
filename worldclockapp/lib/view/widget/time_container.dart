@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:worldclockapp/constant.dart';
+import 'custom_text_widget.dart';
 
+// one of the boxes in time area of the detail screen
 class TimeContainer extends StatelessWidget {
   const TimeContainer({
     Key? key,
-    required this.isLight, required this.timeText,
+    required this.isLight,
+    required this.timeText,
   }) : super(key: key);
 
-  final bool isLight;
-  final String timeText;
+  final bool isLight;     // theme mode
+  final String timeText;  // hour or minute text 
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +25,7 @@ class TimeContainer extends StatelessWidget {
             BorderSide(color: darkColor, width: 2.0)),
       ),
       child: Center(
-        child: Text(timeText.length == 1 ? '0$timeText': timeText,
-            style: TextStyle(
-                color: isLight ? darkColor : whiteColor,
-                fontFamily: 'Montserrat',
-                fontWeight: FontWeight.w600,
-                fontSize: 79)),
+        child: CustomTextWidget(text: timeText.length == 1 ? '0$timeText' : timeText,fontWeight: FontWeight.w600,fontSize: 79, isLight: isLight),
       ),
     );
   }

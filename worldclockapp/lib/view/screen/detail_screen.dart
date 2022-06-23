@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:worldclockapp/constant.dart';
-
 import '../widget/time_container.dart';
-import '../widget/detail_text_widget.dart';
+import '../widget/custom_text_widget.dart';
 
+// shows detail time information for selected region in region list
 class DetailScreen extends StatelessWidget {
-  const DetailScreen({Key? key, required this.isLight, this.selectedTimeZone, this.selectedArea, this.selectedLocation, this.dayName, this.monthName}) : super(key: key);
+  const DetailScreen({Key? key, required this.isLight, this.selectedTimeZone, required this.selectedArea, required this.selectedLocation, required this.dayName, required this.monthName}) : super(key: key);
 
-  final bool isLight;
-  final selectedTimeZone,selectedArea,selectedLocation,dayName,monthName;
+  final bool isLight;               // theme mode
+  final selectedTimeZone;           // selected timezone datetime info
+  final String selectedArea;       // selected area name
+  final String selectedLocation;   // selected location name
+  final String dayName;            // day name
+  final String monthName;          // month name
 
   @override
   Widget build(BuildContext context) {
@@ -44,20 +48,18 @@ class DetailScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               TimeContainer(isLight: isLight, timeText: '${selectedTimeZone.datetime.hour}'),
-              Text(':',
-                  style: TextStyle(
-                      fontSize: 70, color: isLight ? darkColor : Colors.white)),
+              Text(':',style: TextStyle(fontSize: 70, color: isLight ? darkColor : whiteColor)),
               TimeContainer(isLight: isLight, timeText: '${selectedTimeZone.datetime.minute}')
             ],
           ),
         ),
-        DetailTextWidget(isLight: isLight, text: selectedArea, fontSize: 24, fontWeight: FontWeight.w600),
+        CustomTextWidget(isLight: isLight, text: selectedArea, fontSize: 24, fontWeight: FontWeight.w600),
         const SizedBox(height: 5.0),
-        DetailTextWidget(isLight: isLight, text: selectedLocation, fontSize: 20),
+        CustomTextWidget(isLight: isLight, text: selectedLocation, fontSize: 20),
         const SizedBox(height: 25.0),
-        DetailTextWidget(isLight: isLight, text: '$dayName, GMT ${selectedTimeZone.utcOffset}'),
+        CustomTextWidget(isLight: isLight, text: '$dayName, GMT ${selectedTimeZone.utcOffset}'),
         const SizedBox(height: 5.0),
-        DetailTextWidget(isLight: isLight, text: '$monthName ${selectedTimeZone.datetime.day}, ${selectedTimeZone.datetime.year}'),
+        CustomTextWidget(isLight: isLight, text: '$monthName ${selectedTimeZone.datetime.day}, ${selectedTimeZone.datetime.year}'),
       ]),
     );
   }

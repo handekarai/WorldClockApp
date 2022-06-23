@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:worldclockapp/constant.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
+// button to change theme inside app
 class ThemeButton extends StatelessWidget {
   const ThemeButton({
     Key? key,
     required this.isLight, required this.onTap,
   }) : super(key: key);
 
-  final bool isLight;
-  final Function onTap;
+  final bool isLight;       // theme mode
+  final Function onTap;     // button action
 
   @override
   Widget build(BuildContext context) {

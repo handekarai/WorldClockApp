@@ -12,15 +12,62 @@ abstract class HomeViewModelBase with Store{
   final _worldTimeApiService = WorldTimeApiService();
 
   @observable
-  var selectedArea,selectedLocation,selectedTimeZone,userTimeZone;
-
-  @observable 
-  var regions = ObservableList();
+  var selectedArea;                 // to store selected area
 
   @observable
-  bool isLight = true;
+  var selectedLocation;             // to store selected location
 
+  @observable
+  var selectedTimeZone;             // to store user's selected timezone data coming from api
 
+   @observable
+  var userTimeZone;                 // to store user's timezone data coming from api
+
+  @observable 
+  var regions = ObservableList();   // to store region list coming from api
+
+  @observable
+  bool isLight = true;              // corresponds to theme is light mode or not
+
+  // changes theme according to existed
+  @action
+  changeTheme(){
+    isLight = !isLight;
+  }
+
+  // get timezone data of current user from api
+  @action
+  getUserTimeZone() async { 
+    userTimeZone = RegionListItemModel.fromJson(await _worldTimeApiService.fetchUserTimeZone());
+  }
+
+  // get timezone data according to selected region from api
+  @action
+  getSelectedTimeZone(String region) async {
+    selectedTimeZone = RegionListItemModel.fromJson(await _worldTimeApiService.fetchRegionTimeZone(region));
+  }
+
+  // gets region list from the api
+  @action
+  getRegions() async {
+    regions = ObservableList.of(await _worldTimeApiService.fetchRegions());
+  }
+
+  // splits region name according to first slash
+  @action 
+  splitRegionName(String regionName){
+    int idx = regionName.indexOf("/");
+    selectedArea = regionName.substring(0,idx).trim();
+    selectedLocation = regionName.substring(idx+1).trim();
+  }
+
+  // filters region list according to name with given keyword
+  @action 
+  filterRegions(String keyword){
+     regions = ObservableList.of(regions.where((i) => (i.toLowerCase().contains(keyword.toLowerCase()))).toList());
+  }
+
+  // returns month name according to month number
   String getMonthName(month){
     switch (month){
       case 1: { return 'Ocak';} 
@@ -39,6 +86,7 @@ abstract class HomeViewModelBase with Store{
     return 'null';
   }
 
+  //converts name of day to turkish
   String getDayName(date){
     switch(DateFormat('EEEE').format(date??DateTime.now())){
       case 'Monday' : { return 'Pazartesi';}
@@ -52,34 +100,20 @@ abstract class HomeViewModelBase with Store{
     return 'null';
   }
 
-  @action
-  changeTheme(){
-    isLight = !isLight;
-  }
-  @action
-  getUserTimeZone() async { 
-    userTimeZone = RegionListItemModel.fromJson(await _worldTimeApiService.fetchUserTimeZone());
-   // print(userTimeZone);
-  }
-  @action
-  getRegionTimeZone(String region) async {
-    selectedTimeZone = RegionListItemModel.fromJson(await _worldTimeApiService.fetchRegionTimeZone(region));
+  // changes welcome message according to hour
+  String getWelcomeMessage(hour){
+    hour = hour??12;
+
+    if(hour >= 5 && hour < 12){
+      return 'Günaydın';
+    } 
+    if(hour >= 12 && hour < 17 ){
+      return 'İyi günler';
+    }
+    if(hour >= 17 && hour < 22 ){
+      return 'İyi akşamlar';
+    }
+    return 'İyi geceler';
   }
 
-  @action
-  getRegions() async {
-    regions = ObservableList.of(await _worldTimeApiService.fetchRegions());
-  }
-
-  @action 
-  splitRegionName(String regionName){
-    int idx = regionName.indexOf("/");
-    selectedArea = regionName.substring(0,idx).trim();
-    selectedLocation = regionName.substring(idx+1).trim();
-  }
-
-  @action 
-  filterRegions(String keyword){
-     regions = ObservableList.of(regions.where((i) => (i.toLowerCase().contains(keyword.toLowerCase()))).toList());
-  }
 }

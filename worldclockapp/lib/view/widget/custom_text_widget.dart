@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:worldclockapp/constant.dart';
 
-class DetailTextWidget extends StatelessWidget {
-  const DetailTextWidget({
+// text widget for each text in the app
+class CustomTextWidget extends StatelessWidget {
+  const CustomTextWidget({
     Key? key,
     required this.isLight, required this.text, this.fontSize, this.fontWeight,
   }) : super(key: key);

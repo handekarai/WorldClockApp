@@ -113,13 +113,13 @@ mixin _$HomeViewModel on HomeViewModelBase, Store {
     return _$getUserTimeZoneAsyncAction.run(() => super.getUserTimeZone());
   }
 
-  late final _$getRegionTimeZoneAsyncAction =
-      AsyncAction('HomeViewModelBase.getRegionTimeZone', context: context);
+  late final _$getSelectedTimeZoneAsyncAction =
+      AsyncAction('HomeViewModelBase.getSelectedTimeZone', context: context);
 
   @override
-  Future getRegionTimeZone(String region) {
-    return _$getRegionTimeZoneAsyncAction
-        .run(() => super.getRegionTimeZone(region));
+  Future getSelectedTimeZone(String region) {
+    return _$getSelectedTimeZoneAsyncAction
+        .run(() => super.getSelectedTimeZone(region));
   }
 
   late final _$getRegionsAsyncAction =

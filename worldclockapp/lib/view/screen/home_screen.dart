@@ -49,9 +49,9 @@ class HomeScreen extends StatelessWidget {
                           isLight: _homeViewModel.isLight,
                           userTimeZone: _homeViewModel.userTimeZone,
                           userMonthName: _homeViewModel.getMonthName(
-                              _homeViewModel.userTimeZone.datetime.month),
+                              _homeViewModel.userTimeZone?.datetime.month),
                           userDayName: _homeViewModel.getDayName(
-                              _homeViewModel.userTimeZone.datetime)),
+                              _homeViewModel.userTimeZone?.datetime)),
                     ),
                     Positioned(
                         bottom:

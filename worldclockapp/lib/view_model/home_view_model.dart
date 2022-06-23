@@ -21,7 +21,7 @@ abstract class HomeViewModelBase with Store{
   var isLight = true;
 
 
-  String getMonthName(int month){
+  String getMonthName(month){
     switch (month){
       case 1: { return 'Ocak';} 
       case 2: { return 'Şubat';} 
@@ -40,9 +40,9 @@ abstract class HomeViewModelBase with Store{
   }
 
   String getDayName(date){
-    switch(DateFormat('EEEE').format(date)){
-      case 'Monday' : { return '';}
-      case 'Tuesday' : { return '';}
+    switch(DateFormat('EEEE').format(date??DateTime.now())){
+      case 'Monday' : { return 'Pazartesi';}
+      case 'Tuesday' : { return 'Salı';}
       case 'Wednesday' : { return 'Çarşamba';}
       case 'Thursday' : { return 'Perşembe';}
       case 'Friday' : { return 'Cuma';}

@@ -7,8 +7,8 @@ Benefits: You don't have to calculate the time difference between you and your l
 
 Used Api: https://worldtimeapi.org/api/
 
-## App Screen
+## App Screens
 
+![Screen Shot 2022-06-23 at 6 37 52 PM](https://user-images.githubusercontent.com/3129441/175338889-7264f9cf-7786-4ecc-ac33-364a25416ae9.png)
 
-![Screen Shot 2022-06-23 at 1 58 34 AM](https://user-images.githubusercontent.com/3129441/175168252-3ddd0547-af21-4c11-a642-9b78919ff6f9.png)
-![Screen Shot 2022-06-23 at 1 59 15 AM](https://user-images.githubusercontent.com/3129441/175168314-88b60513-c24d-47f6-abe2-dcb4ae72318f.png)
+![Screen Shot 2022-06-23 at 6 38 01 PM](https://user-images.githubusercontent.com/3129441/175338882-151e4284-7f89-424f-93cb-1b4a54e54bff.png)

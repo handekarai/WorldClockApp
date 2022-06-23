@@ -18,7 +18,7 @@ abstract class HomeViewModelBase with Store{
   var regions = ObservableList();
 
   @observable
-  var isLight = true;
+  bool isLight = true;
 
 
   String getMonthName(month){

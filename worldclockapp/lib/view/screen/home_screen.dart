@@ -15,9 +15,10 @@ class HomeScreen extends StatelessWidget {
   final HomeViewModel _homeViewModel = HomeViewModel();
 
   setupData() async {
-    await _homeViewModel.getRegions();
-    await _homeViewModel.getUserTimeZone();
-    FlutterNativeSplash.remove();
+    WidgetsBinding.instance.window.platformBrightness == Brightness.dark ? _homeViewModel.changeTheme() : null;  //get device's theme
+    await _homeViewModel.getRegions();                                                                           //get region's list
+    await _homeViewModel.getUserTimeZone();                                                                      //get user's timezone information
+    FlutterNativeSplash.remove();                                                                                //close splash screen after data comes
   }
 
   @override
